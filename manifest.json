@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "TL;DR News Summarizer",
+  "version": "1.0",
+  "description": "Generate TL;DR summaries of web pages using local Ollama models",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "scripting",
+    "notifications"
+  ],
+  "host_permissions": [
+    "http://localhost:11434/*",
+    "http://localhost",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "TL;DR Summarizer"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["selection-popup.css"],
+      "js": ["content.js", "selection-popup.js"],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
